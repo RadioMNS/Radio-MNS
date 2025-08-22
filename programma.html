@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Radio MNS — Programma</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- lokale pagina-overrides: page transition + subtle schedule transitions -->
+  <style>
+    /* page transition (fade in/out) */
+    #page {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .42s ease, transform .42s cubic-bezier(.22,.9,.16,1);
+    }
+    #page.enter { opacity: 1; transform: none; }
+    #page.exit { opacity: 0; transform: translateY(6px); }
+
+    /* schedule animated reveal for items */
+    .schedule-day { transition: opacity .28s ease, transform .28s ease, height .28s ease; }
+    .schedule-day.hidden { opacity: 0; transform: translateY(6px); height: 0; overflow: hidden; padding:0; margin:0; }
+
+    /* accessible focus for day tabs */
+    .day-tab:focus { outline: 3px solid rgba(77,184,255,0.25); outline-offset: 4px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      #page, .schedule-day { transition: none !important; transform: none !important; }
+    }
+  </style>
+
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header id="site-header" class="site-header" role="banner">
+    <div class="brand container">
+      <div class="brand-left">
+        <div class="logo" aria-hidden="true">
+          <!-- gebruik jouw eigen logo (base64 of url) -->
+          <img id="logo-img-2" src="logo.png" alt="Radio MNS logo">
+        </div>
+        <div class="brand-text"><h1>Radio MNS</h1><p class="tagline">Uitzendschema</p></div>
+      </div>
+
+      <nav class="main-nav" role="navigation" aria-label="Hoofdmenu">
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="programma.html" class="nav-link active">Programma</a>
+        </div>
+
+        <div class="nav-actions">
+          <a class="nav-cta nav-cta-live" href="https://radiomnsofficial.ismyradio.com/" target="_blank" rel="noopener noreferrer" aria-label="Luister live op Radio MNS">
+            <span class="live-dot" aria-hidden="true"></span><span class="cta-text">▶ Luister Live</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- page wrapper for transition -->
+  <main id="page" class="container narrow" role="main">
+    <section class="card">
+      <h2>Uitzendschema</h2>
+      <p class="muted">Klik op een dag om het schema te filteren — of kies "Alle dagen".</p>
+
+      <div class="day-tabs" role="tablist" aria-label="Dagen" style="margin-top:12px;">
+        <button class="day-tab" data-day="all" aria-pressed="true">Alle dagen</button>
+        <button class="day-tab" data-day="maandag" aria-pressed="false">Maandag</button>
+        <button class="day-tab" data-day="dinsdag" aria-pressed="false">Dinsdag</button>
+        <button class="day-tab" data-day="woensdag" aria-pressed="false">Woensdag</button>
+        <button class="day-tab" data-day="donderdag" aria-pressed="false">Donderdag</button>
+        <button class="day-tab" data-day="vrijdag" aria-pressed="false">Vrijdag</button>
+        <button class="day-tab" data-day="zaterdag" aria-pressed="false">Zaterdag</button>
+        <button class="day-tab" data-day="zondag" aria-pressed="false">Zondag</button>
+      </div>
+
+      <!-- NU SPEELT (zelfde component als op index, rendered locally) -->
+      <div id="now-playing-card" class="card" style="margin-top:14px;" aria-live="polite">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <h3 style="margin:0 0 4px 0;">Programma — Nu live</h3>
+            <div class="muted" style="font-size:.95rem;">De actuele uitzending</div>
+          </div>
+          <a class="nav-cta nav-cta-live" href="https://radiomnsofficial.ismyradio.com/" target="_blank" rel="noopener noreferrer" aria-label="Luister live">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span class="cta-text">Luister</span>
+          </a>
+        </div>
+
+        <div id="now-playing" style="margin-top:12px;">
+          <div class="muted">Laden…</div>
+        </div>
+      </div>
+
+      <!-- SCHEDULE GRID (houd per-dag HTML zoals je wilde) -->
+      <div class="schedule-grid" role="list" style="margin-top:12px;">
+        <article class="schedule-day" data-day="zondag" id="zondag">
+          <h3>Zondag</h3>
+          <div class="program-item"><time class="program-time">10:00 - 11:00</time><div class="program-title">Vroege Vibes</div></div>
+          <div class="program-item"><time class="program-time">11:00 - 16:00</time><div class="program-title">The Big Musicshow</div></div>
+          <div class="program-item"><time class="program-time">16:00 - 17:00</time><div class="program-title">MNS Show</div></div>
+        </article>
+
+        <article class="schedule-day" data-day="maandag" id="maandag">
+          <h3>Maandag</h3>
+          <div class="program-item"><time class="program-time">18:00 - 20:00</time><div class="program-title">The Big Musicshow</div></div>
+        </article>
+
+        <article class="schedule-day" data-day="woensdag" id="woensdag">
+          <h3>Woensdag</h3>
+          <div class="program-item"><time class="program-time">14:00 - 16:00</time><div class="program-title">The Big Musicshow</div></div>
+          <div class="program-item"><time class="program-time">16:00 - 17:00</time><div class="program-title">Het Plezier van 4</div></div>
+          <div class="program-item"><time class="program-time">17:00 - 20:00</time><div class="program-title">The Big Musicshow</div></div>
+        </article>
+
+        <article class="schedule-day" data-day="vrijdag" id="vrijdag">
+          <h3>Vrijdag</h3>
+          <div class="program-item"><time class="program-time">17:00 - 18:00</time><div class="program-title">Verassingsshow!</div></div>
+          <div class="program-item"><time class="program-time">18:00 - 21:00</time><div class="program-title">The Big Musicshow</div></div>
+        </article>
+
+        <article class="schedule-day" data-day="zaterdag" id="zaterdag">
+          <h3>Zaterdag</h3>
+          <div class="program-item"><time class="program-time">14:00 - 15:00</time><div class="program-title">The Big Musicshow</div></div>
+          <div class="program-item"><time class="program-time">15:00 - 16:00</time><div class="program-title">Verassingsshow!</div></div>
+          <div class="program-item"><time class="program-time">16:00 - 21:00</time><div class="program-title">The Big Musicshow</div></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>© <span id="year-2"></span> Radio MNS</div>
+    </div>
+  </footer>
+</body>
+</html>

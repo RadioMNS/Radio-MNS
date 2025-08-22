@@ -1,0 +1,240 @@
+:root{
+  --bg: #f6fbff;
+  --accent: #4db8ff;
+  --accent-2: #0077b3;
+  --muted: #6b7c87;
+  --card-radius: 14px;
+  --shadow-1: 0 6px 18px rgba(3,24,40,0.08);
+  --shadow-2: 0 12px 30px rgba(3,24,40,0.10);
+  --header-height: 84px;
+  --container-max: 1200px;
+  --gutter: 20px;
+}
+
+/* base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:#0e2230;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: linear-gradient(180deg,var(--bg) 0%, #eaf8ff 100%);
+  background-attachment: fixed;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+}
+
+/* containers & spacing */
+.container{max-width:var(--container-max);margin:0 auto;padding:0 clamp(12px,3.5vw,36px)}
+.container.narrow{max-width:980px}
+.brand-left{display:flex;align-items:center;gap:12px}
+
+/* header */
+.site-header{
+  height:var(--header-height);
+  display:flex;align-items:center;justify-content:center;
+  position:sticky;top:0;z-index:80;
+  background:linear-gradient(90deg, rgba(77,184,255,0.98), rgba(0,119,179,0.98));
+  box-shadow:var(--shadow-1);
+  backdrop-filter: blur(6px) saturate(120%);
+  transition:box-shadow .28s ease, transform .28s ease;
+}
+
+.site-header .brand{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#fff,#cfeeff);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.logo img{width:56px;height:56px;object-fit:contain;display:block}
+.brand-text h1{margin:0;font-size:1.05rem}
+.tagline{margin:0;font-size:.85rem;opacity:.95}
+
+/* nav */
+.main-nav{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;gap:10px;align-items:center}
+.nav-link{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 12px;border-radius:999px;font-weight:700;transition:transform .16s, background .12s}
+.nav-link:hover{transform:translateY(-3px);background:rgba(255,255,255,0.12)}
+.nav-link.active{background:rgba(255,255,255,0.95);color:var(--accent-2)}
+
+/* improved CTA */
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-cta{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:14px;text-decoration:none;cursor:pointer}
+.nav-cta-live{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:white;font-weight:800;box-shadow:var(--shadow-1);
+  transition:transform .16s ease, box-shadow .16s ease;
+  position:relative;
+  overflow:visible;
+}
+.nav-cta-live:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+
+/* live dot + pulse ring */
+.live-dot{
+  width:10px;height:10px;border-radius:50%;background:#ff4d4d;display:inline-block;box-shadow:0 0 8px rgba(255,77,77,0.18);position:relative;
+}
+.live-dot::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;
+  box-shadow:0 0 0 rgba(255,77,77,0.45);animation:livePulse 1600ms infinite;
+}
+@keyframes livePulse{
+  0%{box-shadow:0 0 0 0 rgba(255,77,77,0.45)}
+  70%{box-shadow:0 0 0 12px rgba(255,77,77,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,77,77,0)}
+}
+.nav-cta-live .cta-text{font-weight:800}
+
+/* hero */
+.hero{padding:46px 0 28px}
+.hero-inner{display:flex;gap:32px;align-items:flex-start}
+.hero-col{flex:1}
+.hero-right{width:420px;min-width:260px}
+.hero-title{font-size:clamp(1.5rem,3.6vw,2.8rem);margin:0;color:var(--accent-2);animation:fadeInUp .7s both}
+.hero-sub{margin:0;color:var(--muted)}
+.hero-actions{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+
+/* buttons */
+.btn{display:inline-block;padding:10px 18px;border-radius:12px;text-decoration:none;font-weight:700;line-height:1;min-height:40px;align-items:center;display:inline-flex;justify-content:center}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:var(--shadow-1);transition:transform .16s}
+.btn-primary:hover{transform:translateY(-3px)}
+.btn-ghost{background:transparent;border:1px solid rgba(12,35,50,0.06);color:var(--accent-2)}
+
+/* small button */
+.btn-small{padding:7px 10px;border-radius:10px;font-weight:700;min-height:36px}
+
+/* feature grid */
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.feature.small{padding:12px}
+
+/* cards */
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));border-radius:var(--card-radius);padding:16px;box-shadow:var(--shadow-1);transition:transform .18s ease, box-shadow .18s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-2)}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.muted{color:var(--muted);font-size:.95rem}
+
+/* player */
+.player-placeholder{height:120px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fdff);box-shadow:inset 0 1px 0 rgba(0,0,0,0.02)}
+.player-inner{font-weight:700;color:var(--accent-2)}
+.player-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+
+/* carousel */
+.carousel{position:relative;margin-top:8px}
+.carousel-viewport{overflow:hidden;border-radius:12px}
+.carousel-track{display:flex;transition:transform 600ms cubic-bezier(.22,.9,.16,1);will-change:transform;touch-action:pan-y}
+.carousel-slide{min-width:100%;height:260px;object-fit:cover;display:block;flex-shrink:0;border-radius:8px}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.96);border:0;padding:10px 14px;border-radius:10px;cursor:pointer;box-shadow:var(--shadow-1);font-size:18px;min-width:44px;min-height:44px}
+.carousel-btn.prev{left:12px}
+.carousel-btn.next{right:12px}
+.carousel-dots{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px}
+.carousel-dot{width:10px;height:10px;border-radius:999px;background:rgba(0,0,0,0.12);cursor:pointer;border:0;transition:transform .18s}
+.carousel-dot.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));transform:scale(1.15);box-shadow:0 6px 14px rgba(0,119,179,0.12)}
+.carousel-dot.active::after{content:"";display:block;width:20px;height:20px;border-radius:50%;position:absolute;transform:translate(-5px,-5px);opacity:.06;}
+
+/* socials */
+.small-socials{display:flex;gap:8px}
+.social{padding:6px 10px;border-radius:8px;background:linear-gradient(180deg,#fff,#f7fdff);font-weight:700;color:var(--accent-2)}
+
+/* schedule */
+.day-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.day-tab{padding:8px 12px;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fdff);border:1px solid rgba(3,24,40,0.03);cursor:pointer;font-weight:700}
+.day-tab[aria-pressed="true"]{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;box-shadow:var(--shadow-2)}
+.schedule-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:12px}
+.schedule-day{background:linear-gradient(180deg,#fff,#fbfeff);padding:14px;border-radius:12px;box-shadow:var(--shadow-1)}
+.schedule-day h3{margin:0 0 8px 0}
+.program-item{display:flex;align-items:flex-start;gap:12px;padding:8px 0;border-top:1px dashed rgba(0,0,0,0.04);font-weight:700;transition:transform .14s ease, box-shadow .14s}
+.program-item:first-child{border-top:0}
+.program-item:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(3,24,40,0.06)}
+.program-time{display:inline-block;width:110px;color:var(--muted);font-weight:700}
+.program-title{flex:1}
+
+/* footer */
+.site-footer{padding:20px 16px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;text-align:center;margin-top:28px;border-radius:0 0 12px 12px}
+.small-muted{opacity:.95}
+
+/* subtle animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+}
+
+/* ---------------------------
+   Mobile / small-screen tweaks
+   (These keep design but improve usability)
+   --------------------------- */
+
+/* compact header on small screens, keep visual style */
+@media (max-width:680px){
+  :root{ --header-height: 64px; } /* reduce sticky header height */
+  .site-header{height:var(--header-height)}
+  .logo{width:52px;height:52px}
+  .logo img{width:44px;height:44px}
+  .brand-text h1{font-size:1rem}
+  .tagline{font-size:.78rem}
+  .main-nav{gap:12px}
+  .nav-link{padding:10px 12px} /* bigger tap targets for nav */
+  .nav-cta{padding:8px 12px}   /* slightly smaller CTA padding on narrow screens */
+  .hero{padding:28px 0 18px}
+  .hero-inner{gap:18px}
+  .hero-right{width:100%;min-width:0}
+  .feature-grid{grid-template-columns:repeat(2,1fr)}
+  .carousel-slide{height:220px}
+  .player-placeholder{height:140px}
+}
+
+/* single-column schedule and friendlier times on small viewports */
+@media (max-width:640px){
+  .container{padding:0 14px}
+  .feature-grid{grid-template-columns:1fr}
+  .hero-inner{flex-direction:column-reverse}
+  .card{padding:14px}
+  .btn{padding:12px 16px;min-height:44px} /* larger tap targets */
+  .btn-primary{padding:12px 16px}
+  .day-tabs{gap:6px}
+  .schedule-grid{grid-template-columns:1fr}
+  .program-time{width:85px;display:inline-block}
+  .program-item{padding:10px 0}
+  .carousel-btn{padding:10px 12px;min-width:44px;min-height:44px}
+  .carousel-dot{width:12px;height:12px}
+  .carousel-track{touch-action:pan-y pinch-zoom}
+  /* reduce hover transform of cards to avoid accidental lifts on touch */
+  .card:hover{transform:none;box-shadow:var(--shadow-1)}
+}
+
+/* very small phones */
+@media (max-width:420px){
+  :root{ --header-height: 60px; }
+  .logo{width:48px;height:48px}
+  .logo img{width:40px;height:40px}
+  .brand-text h1{font-size:.98rem}
+  .tagline{font-size:.72rem}
+  .nav-link{font-size:.95rem;padding:10px 10px}
+  .nav-cta .cta-text{white-space:nowrap}
+  .hero-title{font-size:1.45rem}
+  .player-placeholder{height:120px}
+  .carousel-slide{height:200px}
+  .carousel-btn.prev{left:8px}
+  .carousel-btn.next{right:8px}
+  .carousel-dots{bottom:10px}
+  .program-time{width:74px}
+}
+
+/* accessibility: larger focus rings on small screens */
+@media (max-width:880px){
+  .day-tab:focus, .nav-link:focus, .nav-cta:focus, .btn:focus { outline: 3px solid rgba(77,184,255,0.18); outline-offset: 3px; }
+}
+
+/* prevent subtle horizontal scroll caused by transforms on very small browsers */
+html,body{overflow-x:hidden}
+
+/* ensure long titles wrap cleanly */
+.program-title, .brand-text, .hero-sub, .muted { word-break: break-word; hyphens: auto; }
+
+/* subtle reduction of card hover lift on small devices to reduce layout shift */
+@media (pointer:coarse){
+  .card:hover{transform:none;box-shadow:var(--shadow-1);}
+}
+
+/* ensure interactive elements meet comfortable touch sizes */
+.nav-link, .day-tab, .btn, .nav-cta, .carousel-btn, .carousel-dot { -webkit-tap-highlight-color: rgba(0,0,0,0.06); }
+
+/* end of file */
